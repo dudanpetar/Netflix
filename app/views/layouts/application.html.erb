@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <!-- Add stylesheet pack tag after stylesheet link tag -->
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <title>Netflix</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -10,7 +13,12 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="font-sans relative bg-black text-white">
+   <p class="notice"><%= notice %></p>
+   <p class="alert"><%= alert %></p>
+
+   <%= render 'layouts/navbar' %>
+   <%= yield %>
+   <%= render 'layouts/footer' unless current_page?(new_user_session_path) || current_page?(new_user_registration_path) %>
   </body>
 </html>

@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+
+  before_action :authenticate_user!, except: [:index, :show]
   def index
     @movies = Movie.all
   end
@@ -21,12 +23,6 @@ class MoviesController < ApplicationController
     end
   end
   
-  private
-  
-  def movie_params
-    params.require(:movie).permit(:title, :description, :duration, :release_date, :cast)
-  end
-
   def edit
     @movie = Movie.find(params[:id])
   end
@@ -47,5 +43,12 @@ class MoviesController < ApplicationController
 
     redirect_to movies_path
   end
+  private
+  
+  def movie_params
+    params.require(:movie).permit(:title, :description, :duration, :release_date, :cast)
+  end
+
+
   
 end
